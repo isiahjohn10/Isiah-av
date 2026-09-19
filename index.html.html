@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>May I Court You, Avril?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --wine:#651f32;--burgundy:#7f2940;--deep:#3b101c;--cream:#fff7e8;
+  --paper:#f8ead1;--gold:#c99a57;--pink:#eaa0ad;--ink:#542c31;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:"Playfair Display",serif;overflow-x:hidden}
+section{min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;padding:32px 18px;position:relative;overflow:hidden}
+h1,h2{font-family:"Great Vibes","Dancing Script",cursive;font-weight:400;line-height:1.05}
+button{font-family:"Playfair Display",serif;cursor:pointer}
+#musicToggle{position:fixed;z-index:50;right:18px;top:18px;width:48px;height:48px;border-radius:50%;border:1px solid #ffffff80;background:var(--wine);color:white;font-size:19px;box-shadow:0 8px 25px #0003}
+.grain{position:absolute;inset:0;opacity:.13;pointer-events:none;background-image:radial-gradient(#651f32 1px,transparent 1px);background-size:7px 7px}
+.fade{opacity:0;transform:translateY(38px);transition:1s ease}
+.fade.show{opacity:1;transform:none}
+ 
+/* LANDING */
+#landing{background:radial-gradient(circle at top,#fdf1df 0%,#f5dfc3 55%,#e8c6ad 100%)}
+.landing-card{text-align:center;max-width:700px;z-index:2}
+.landing-card h1{font-size:clamp(3.8rem,13vw,7rem);color:var(--wine);margin:0 0 8px}
+.hint{font-size:.95rem;letter-spacing:.08em;opacity:.7}
+.mailbox{width:260px;height:250px;margin:25px auto 32px;position:relative;filter:drop-shadow(0 20px 15px #5a263833)}
+.box{position:absolute;bottom:0;left:25px;width:210px;height:145px;background:linear-gradient(135deg,#7c263e,#541426);border-radius:105px 105px 14px 14px;border:6px solid #48101f}
+.post{position:absolute;left:112px;bottom:-80px;width:38px;height:100px;background:#592034;border:5px solid #48101f}
+.flag{position:absolute;right:8px;top:85px;width:65px;height:12px;background:#d49b54;border-radius:5px;transform:rotate(-18deg);transform-origin:left}
+.flag:after{content:"";position:absolute;right:-10px;top:-5px;width:18px;height:22px;border:7px solid #d49b54;border-left:0;border-radius:0 10px 10px 0}
+.envelope{position:absolute;z-index:3;left:52px;top:28px;width:160px;height:105px;background:var(--cream);transform:rotate(-4deg);border:2px solid #cba57e;box-shadow:0 8px 15px #0002}
+.envelope:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 49%,#e1c8a6 50%,transparent 51%),linear-gradient(45deg,transparent 49%,#e1c8a6 50%,transparent 51%)}
+.address{position:absolute;z-index:4;top:52px;left:75px;font-family:"Dancing Script";font-size:26px;color:var(--wine);transform:rotate(-4deg)}
+.scroll-arrow{font-size:28px;animation:bob 1.8s infinite}@keyframes bob{50%{transform:translateY(9px)}}
+ 
+/* LETTER */
+#letter{background:#f8ead1}
+/* extra bottom padding keeps the "attachment" note from covering the 💋 */
+.paper{width:min(92vw,680px);min-height:620px;padding:50px 32px 140px;background:linear-gradient(90deg,#fdf5e7,#f7e5c9);box-shadow:0 18px 45px #4a19252b;position:relative;border:1px solid #d6b98f;transform:rotate(-.5deg)}
+.paper:before{content:"";position:absolute;left:18px;top:0;bottom:0;border-left:2px dashed #d9b89555}
+.paper h2{font-size:3.7rem;margin:0;color:var(--wine)}
+.editable-letter{font-family:"Playfair Display",serif;font-size:1.15rem;line-height:1.8;white-space:pre-line;color:var(--ink)}
+.signature{font-family:"Dancing Script";font-size:2rem;color:var(--wine);text-align:left;margin-top:20px}
+.kiss{font-size:3rem;text-align:right;transform:rotate(-12deg)}
+.attachment{position:absolute;right:-5px;bottom:18px;width:230px;padding:18px;background:var(--burgundy);color:var(--cream);transform:rotate(4deg);clip-path:polygon(0 0,100% 0,100% 100%,0 100%);box-shadow:0 8px 20px #0003}
+.attachment:before{content:"✦ ✦ ✦";letter-spacing:12px;color:#e9c587;font-size:12px}
+ 
+/* ASK */
+#ask{background:linear-gradient(135deg,#5a1729,#8d3348);color:var(--cream);text-align:center}
+.ticket{width:min(92vw,560px);padding:48px 25px;background:var(--paper);color:var(--wine);position:relative;box-shadow:0 20px 50px #0005}
+.ticket:before,.ticket:after{content:"";position:absolute;top:0;bottom:0;width:16px;background:radial-gradient(circle at 8px 8px,transparent 7px,var(--burgundy) 7.5px);background-size:16px 16px}
+.ticket:before{left:-8px}.ticket:after{right:-8px;transform:rotate(180deg)}
+.ticket h2{font-size:clamp(3.5rem,12vw,6rem);margin:10px 0 30px}
+.choice{display:flex;gap:18px;justify-content:center;min-height:70px;align-items:center;position:relative}
+.choice button{border:0;border-radius:999px;padding:15px 32px;font-size:1rem;font-weight:bold;transition:.25s}
+#yes{background:var(--wine);color:white;box-shadow:0 8px 18px #651f3244}
+#no{background:#e8c9b8;color:var(--wine)}
+.caption{font-size:.85rem;opacity:.7;margin-top:28px}
+ 
+/* CELEBRATION */
+#celebration{background:radial-gradient(circle,#fff9ed,#efd6bd);text-align:center}
+.celebrate{max-width:720px}
+.celebrate h2{font-size:clamp(3.5rem,12vw,6.5rem);color:var(--wine);margin:0}
+.heartgift{margin:28px auto 0;width:180px;height:150px;position:relative;cursor:pointer;transition:.35s}
+.heartgift:hover{transform:scale(1.06) rotate(-2deg)}
+.heartshape{position:absolute;width:95px;height:145px;background:#a8304c;border-radius:95px 95px 0 0;transform:rotate(-45deg);left:28px;top:0}
+.heartshape:before{content:"";position:absolute;width:95px;height:145px;background:#a8304c;border-radius:95px 95px 0 0;transform:rotate(90deg);transform-origin:0 100%;left:95px;top:-95px}
+.ribbon{position:absolute;z-index:3;left:80px;top:18px;width:18px;height:125px;background:#e6c276;border-radius:4px}
+.giftprompt{font-family:"Dancing Script";font-size:1.7rem;margin-top:14px}
+#burst{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden}
+.particle{position:absolute;font-size:24px;animation:burst 1.7s ease-out forwards}@keyframes burst{to{transform:translate(var(--x),var(--y)) rotate(500deg);opacity:0}}
+ 
+/* GIFTS */
+#gifts{background:#f3e1ca;text-align:center}
+.gift-wrap{width:min(95vw,850px)}
+.gift-wrap h2{font-size:clamp(3.5rem,11vw,6rem);color:var(--wine);margin:0 0 35px}
+.cards{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.flip{width:210px;height:220px;perspective:1000px;cursor:pointer}
+.inner{position:relative;width:100%;height:100%;transition:transform .8s;transform-style:preserve-3d}
+.flip.open .inner{transform:rotateY(180deg)}
+.front,.back{position:absolute;inset:0;backface-visibility:hidden;border-radius:30px 30px 16px 16px;display:flex;align-items:center;justify-content:center;padding:22px;box-shadow:0 12px 24px #5a243326}
+.front{background:var(--wine);color:white;font-family:"Great Vibes";font-size:3rem}
+.back{background:var(--cream);color:var(--wine);transform:rotateY(180deg);font-size:1.2rem;font-weight:bold;text-align:center}
+.done{margin-top:35px;background:var(--wine);color:white;border:0;padding:14px 35px;border-radius:999px}
+ 
+/* SONG */
+#song{background:linear-gradient(135deg,#3d101c,#6c2337);color:var(--cream);text-align:center}
+.songbox{max-width:680px}
+.songbox h2{font-size:clamp(3.5rem,11vw,6rem);margin:0 0 25px}
+.music-art{height:260px;position:relative;margin:auto;width:310px}
+.vinyl{position:absolute;left:5px;top:20px;width:210px;height:210px;border-radius:50%;background:repeating-radial-gradient(circle,#151015 0 4px,#282025 5px 7px);border:8px solid #21151b;animation:spin 7s linear infinite;animation-play-state:paused}
+.playing .vinyl{animation-play-state:running}@keyframes spin{to{transform:rotate(360deg)}}
+.vinyl:after{content:"AVRIL";position:absolute;inset:65px;border-radius:50%;background:#c99a57;color:#5a1828;display:grid;place-items:center;font-size:13px;font-weight:bold}
+.cassette{position:absolute;right:0;bottom:10px;width:190px;height:120px;background:#f2dfc2;color:#5b1b2e;border-radius:8px;border:7px solid #c89a63;transform:rotate(8deg);box-shadow:0 12px 25px #0004}
+.cassette:before{content:"OUR SONG";position:absolute;top:15px;left:20px;right:20px;height:34px;background:#9b3048;color:white;display:grid;place-items:center;font-size:12px;letter-spacing:2px}
+.cassette:after{content:"●    ●";position:absolute;bottom:17px;left:35px;font-size:25px;letter-spacing:16px}
+.player{margin:10px auto;background:#fff8ec1a;border:1px solid #fff4;padding:18px;border-radius:18px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.track{font-size:1.1rem;font-weight:bold}
+.play-btn{background:var(--gold);color:var(--deep);border:none;padding:12px 28px;border-radius:999px;font-weight:bold;font-size:1.05rem;transition:0.2s;box-shadow:0 4px 15px #0003}
+.play-btn:hover{transform:scale(1.05);background:#d4a663}
+audio{width:min(100%,420px);margin-top:5px}
+.footer-note{opacity:.65;font-size:.8rem;margin-top:25px}
+ 
+@media(max-width:560px){
+ .paper{padding:42px 24px 140px;min-height:680px}.attachment{width:190px;font-size:.82rem}
+ .cards{flex-direction:column;align-items:center}.music-art{transform:scale(.88);margin-top:-10px}
+}
+</style>
+</head>
+<body>
+ 
+<script>
+const CONFIG = {
+  name: "Avril",
+  // Backticks (not quotes) so the letter can contain apostrophes and line breaks.
+  letterBody: `Hi Avril, I've been thinking about how to say this for a while, I just want to be honest about something to assure you. hehe
+ 
+Ever since the day I first messaged you that night and we started talking, something changed in me. like everything Talking to you made a lot of things clearer, and honestly, you raised my standard bcs you're always the standard. I just want you to know that I genuinely like you.
+ 
+Avril, you're always beautiful, but that's not the main reason I like you. It's the way who you are always, your personality, the way you talk, how you are with people. I admire you in so many ways, and I love that you're always you.
+ 
+Even our bardagulan and kupalan mean a lot to me. It's our own little way of bonding, and I'm the happiest when we're laughing together. I love listening to you talk, and seeing your eyes light up when you laugh is one of my favorite things. Those moments might seem small to other people, but to me, they mean everything. I really appreciate every detail of you Avril.
+ 
+I know good things takes time, and I believe in us and in the right timing. But if you'll let me, Avril, I'd like to court you. I can't promise to be perfect, but I promise to be sincere and genuine in everything with you, and to make sure you feel cherished and respected every day. I don't want to pretend to you, I want to be pure to you and to be the best version of myself to you and i'm willing to learn and to experience everything with you.
+ 
+I want to build this on trust. I would never do anything to break it, because I know to myself that have no bad intentions with you. I'm not asking you to trust me right now. I just want to earn it over time, until you feel confident that I would never hurt you.
+ 
+Thank you for being the light that pushes me to do better.`,
+  giftNotes: [
+    "matcha🍵",
+    "Ice Cream🍦",
+    "AHH IKAW BAHALA BISAN DIIN AH"
+  ],
+  celebrationMessage: "I’m looking forward to knowing you more, sharing more moments with you, and hopefully building something genuine and beautiful together.",
+  trackTitle: "Happy w u — Arthur Nery ft. Jason Dhakal",
+  backgroundMusic: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3",
+  songMusic: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3"
+};
+</script>
+ 
+<button id="musicToggle" aria-label="Mute or unmute music">🔇</button>
+<div id="burst"></div>
+ 
+<section id="landing">
+  <div class="grain"></div>
+  <div class="landing-card fade">
+    <div class="mailbox">
+      <div class="post"></div><div class="box"></div><div class="flag"></div>
+      <div class="envelope"></div><div class="address">To: Avril</div>
+    </div>
+    <h1>You've got mail, Avril 💌</h1>
+    <p class="hint">A little something is waiting for you</p>
+    <div class="scroll-arrow">↓</div>
+  </div>
+</section>
+ 
+<section id="letter">
+  <div class="paper fade">
+    <h2>Dear <span class="name">Avril</span>,</h2>
+    <div class="editable-letter" id="letterText"></div>
+    <div class="signature">Sincerely yours,<br>Isiah</div>
+    <div class="kiss">💋</div>
+    <div class="attachment">Looks like there's something attached — check it out!</div>
+  </div>
+</section>
+ 
+<section id="ask">
+  <div class="ticket fade">
+    <div>✦ A VERY IMPORTANT QUESTION ✦</div>
+    <h2>May I court you, <span class="name">Avril</span>?</h2>
+    <div class="choice" id="choice">
+      <button id="yes">YES ♡</button>
+      <button id="no">NO</button>
+    </div>
+    <p class="caption">Unfortunately, you have no other choice but to say yes…</p>
+  </div>
+</section>
+ 
+<section id="celebration">
+  <div class="celebrate fade">
+    <h2>Yey! Thank you for saying YES, <span class="name">Avril</span> &lt;3</h2>
+    <p id="celebrationText"></p>
+    <div class="heartgift" id="heartGift" aria-label="Open the heart gift">
+      <div class="heartshape"></div><div class="ribbon"></div>
+    </div>
+    <div class="giftprompt">Click the heart ♡</div>
+  </div>
+</section>
+ 
+<section id="gifts">
+  <div class="gift-wrap fade">
+    <h2>Surprise gifts for you ♡</h2>
+    <div class="cards" id="cards"></div>
+    <button class="done" id="done">Done ♡</button>
+  </div>
+</section>
+ 
+<section id="song">
+  <div class="songbox fade" id="songBox">
+    <h2>This song made me think of you, <span class="name">Avril</span>…</h2>
+    <div class="music-art">
+      <div class="vinyl"></div><div class="cassette"></div>
+    </div>
+    <div class="player">
+      <div class="track" id="trackTitle"></div>
+      <button class="play-btn" id="manualPlayBtn">▶ Play Song</button>
+      <audio id="songAudio" controls preload="auto"></audio>
+    </div>
+    <p class="footer-note">Made with sincerity, just for you ♡</p>
+  </div>
+</section>
+ 
+<audio id="bgAudio" loop preload="auto"></audio>
+ 
+<script>
+const $ = s => document.querySelector(s);
+document.querySelectorAll(".name").forEach(el => el.textContent = CONFIG.name);
+$("#letterText").textContent = CONFIG.letterBody;
+$("#celebrationText").textContent = CONFIG.celebrationMessage;
+$("#trackTitle").textContent = CONFIG.trackTitle;
+ 
+const bg = $("#bgAudio");
+const songAudio = $("#songAudio");
+ 
+bg.src = CONFIG.backgroundMusic;
+songAudio.src = CONFIG.songMusic;
+ 
+$("#cards").innerHTML = CONFIG.giftNotes.map((note,i)=>`
+  <div class="flip" tabindex="0">
+    <div class="inner">
+      <div class="front">♡<br><small style="font-family:Playfair Display;font-size:.7rem">OPEN ME</small></div>
+      <div class="back">${note}</div>
+    </div>
+  </div>`).join("");
+ 
+document.querySelectorAll(".flip").forEach(card=>{
+  card.addEventListener("click",()=>card.classList.toggle("open"));
+  card.addEventListener("keydown",e=>{if(e.key==="Enter") card.click()});
+});
+ 
+const toggle = $("#musicToggle");
+let muted = true;
+bg.muted = true;
+ 
+toggle.addEventListener("click",()=>{
+  muted = !muted; 
+  bg.muted = muted;
+  if(!muted) {
+    if (!songAudio.paused) songAudio.pause();
+    bg.play().catch(()=>{});
+  } else {
+    bg.pause();
+  }
+  toggle.textContent = muted ? "🔇" : "🔊";
+});
+ 
+const manualPlayBtn = $("#manualPlayBtn");
+manualPlayBtn.addEventListener("click", () => {
+  if (songAudio.paused) {
+    bg.pause(); 
+    songAudio.play().then(() => {
+      $("#songBox").classList.add("playing");
+      manualPlayBtn.textContent = "❚❚ Pause Song";
+    }).catch(err => console.log("Audio playback blocked:", err));
+  } else {
+    songAudio.pause();
+    $("#songBox").classList.remove("playing");
+    manualPlayBtn.textContent = "▶ Play Song";
+    if(!muted) bg.play().catch(()=>{});
+  }
+});
+ 
+songAudio.addEventListener("pause", () => {
+  $("#songBox").classList.remove("playing");
+  manualPlayBtn.textContent = "▶ Play Song";
+});
+ 
+songAudio.addEventListener("play", () => {
+  $("#songBox").classList.add("playing");
+  manualPlayBtn.textContent = "❚❚ Pause Song";
+});
+ 
+// Low threshold on purpose: the letter section is several screens tall on phones,
+// so a 20% threshold could never be reached and the letter would stay invisible.
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.querySelectorAll(".fade").forEach(x=>x.classList.add("show"));
+  });
+},{threshold:.05});
+document.querySelectorAll("section").forEach(s=>observer.observe(s));
+$(".fade").classList.add("show");
+ 
+const no=$("#no"), choice=$("#choice");
+function escapeNo(){
+ const parent=choice.getBoundingClientRect(), w=no.offsetWidth, h=no.offsetHeight;
+ const x=Math.random()*(parent.width-w-10)-parent.width/2+30;
+ const y=(Math.random()*100)-50;
+ no.style.transform=`translate(${x}px,${y}px) scale(.88)`;
+}
+no.addEventListener("mouseenter",escapeNo);
+no.addEventListener("click",e=>{e.preventDefault();escapeNo()});
+no.addEventListener("touchstart",e=>{e.preventDefault();escapeNo()},{passive:false});
+ 
+$("#yes").addEventListener("click",()=>{
+ for(let i=0;i<45;i++){
+  const p=document.createElement("span");p.className="particle";
+  p.textContent=Math.random()>.45?"♥":"✦";
+  p.style.left="50%";p.style.top="50%";
+  p.style.setProperty("--x",(Math.random()*100-50)+"vw");
+  p.style.setProperty("--y",(Math.random()*100-50)+"vh");
+  $("#burst").appendChild(p);setTimeout(()=>p.remove(),1800);
+ }
+ $("#celebration").scrollIntoView({behavior:"smooth"});
+});
+ 
+$("#heartGift").addEventListener("click",()=>$("#gifts").scrollIntoView({behavior:"smooth"}));
+$("#done").addEventListener("click",()=>$("#song").scrollIntoView({behavior:"smooth"}));
+ 
+const songObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      bg.pause();
+      songAudio.play().then(() => {
+        $("#songBox").classList.add("playing");
+        manualPlayBtn.textContent = "❚❚ Pause Song";
+      }).catch(() => {
+        manualPlayBtn.textContent = "▶ Play Song";
+      });
+    } else {
+      songAudio.pause();
+      $("#songBox").classList.remove("playing");
+    }
+  });
+},{threshold:.55});
+songObserver.observe($("#song"));
+</script>
+</body>
+</html>
+ 
